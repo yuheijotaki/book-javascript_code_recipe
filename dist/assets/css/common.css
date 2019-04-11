@@ -42,3 +42,44 @@ h3 {
   --end: hsl(322, 100%, 50%);
   background-image: linear-gradient(-135deg, var(--start), var(--end));
 }
+
+/* 093 アナログ時計を表示したい */
+.clock {
+  margin-top: 20px;
+  width: 400px;
+  height: 400px;
+  background: rgba(0,0,0,.1);
+  border-radius: 50%;
+  border: #000 3px solid;
+  position: relative;
+}
+
+.line {
+  position: absolute;
+  transform-origin: bottom;
+  border-radius: 9999px;
+}
+
+.lineHour {
+  width: 10px;
+  height: 150px;
+  top: calc(50% - 150px);
+  left: calc(50% - 5px);
+  background: #000;
+}
+
+.lineMin {
+  width: 4px;
+  height: 200px;
+  top: calc(50% - 200px);
+  left: calc(50% - 2px);
+  background: #000;
+}
+
+.lineSec {
+  width: 2px;
+  height: 200px;
+  top: calc(50% - 200px);
+  left: calc(50% - 1px);
+  background: #aaa;
+}
