@@ -1,22 +1,57 @@
 /**********
-* 113 ユーザー操作に合わせて発生する「イベント」について知りたい
-**********/
-
-/**********
 * 114 ユーザーの操作が起こったときに処理を行いたい
 **********/
+// 要素の参照を取得する
+const button = document.querySelector('.button');
+
+// アロー関数を使う方法
+button.addEventListener('click', () => {
+  console.log(`ボタンがクリックされました`);
+});
+
+// function宣言を使う方法
+button.addEventListener('click', function () {
+  console.log(`ボタンがクリックされました`);
+});
+
+// 関数名を指定する方法
+button.addEventListener('click', onClickButton);
+function onClickButton() {
+  console.log(`ボタンがクリックされました`);
+}
+
+// イベントの情報を取得する
+button.addEventListener('click', (event) => {
+  // クリックされたボタン要素が出力される
+  console.log(event.target);
+});
 
 /**********
 * 115 イベントリスナーを一度だけ呼び出したい
 **********/
+// オプションを指定
+const option = {
+  once: true
+};
 
-/**********
-* 116 設定したイベントリスナーを削除したい
-**********/
+document
+  .querySelector('.button')
+  .addEventListener('click', onClickButton, option);
+
+function onClickButton() {
+  alert('ボタンが押されました。');
+}
 
 /**********
 * 117 ページが表示されたときに処理をしたい
 **********/
+// DOMにアクセスするタイミングで処理を実行する
+window.addEventListener('DOMContentLoaded', () => {
+  // .box の要素数を取得する
+  const boxNum = document.querySelectorAll('.box').length;
+  // ログを出力
+  console.log(`.box要素の数は${boxNum}です`);
+});
 
 /**********
 * 118 クリック時に処理をしたい
