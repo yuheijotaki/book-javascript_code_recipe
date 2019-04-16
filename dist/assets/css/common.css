@@ -108,3 +108,14 @@ h3 {
 .item131_rectangle.big-size {
   background: red;
 }
+
+/* Chapter 8 HTML要素の操作方法 */
+.chapter08_list {
+  display: flex;
+  list-style-type: none;
+}
+
+.chapter08_item {
+  border: #000 1px solid;
+  padding: 20px;
+}
