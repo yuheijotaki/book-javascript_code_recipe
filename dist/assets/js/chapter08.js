@@ -112,40 +112,76 @@ setTimeout(() => {
 }, 3000);
 
 /**********
-* 150 要素を他の要素で置き換えたい
-**********/
-
-/**********
-* 151 新ノードと旧ノードを入れ替えたい
-**********/
-
-/**********
 * 152 要素内のテキストを取得したり、書き換えたりしたい
 **********/
+const item152_text = document.querySelector('.item152_text');
+console.log(item152_text.textContent); // 結果: テキストです。テキストです。
+
+// 書き換え
+setTimeout(() => {
+  item152_text.textContent = 'テキストが書き換えされました。';
+}, 2000);
 
 /**********
 * 153 要素内のHTMLを取得したり、書き換えたりしたい
 **********/
+const item153_html = document.querySelector('.item153_html');
+console.log(item153_html.innerHTML); // 結果: <p>テキストです。テキストです。</p>
+
+// 書き換え
+setTimeout(() => {
+  item153_html.innerHTML = '<p><b>HTMLが書き換えされました。</b></p>';
+}, 2000);
 
 /**********
 * 154 要素（自分自身を含む）のHTMLを取得したり、書き換えたりしたい
 **********/
+const item154_html = document.querySelector('.item154_html');
+console.log(item154_html.outerHTML);
+/* 結果:
+<div class="item154_html">
+  <p>テキストです。テキストです。</p>
+</div>
+*/
+
+// 書き換え
+setTimeout(() => {
+  item154_html.outerHTML = `<div class="item154_html"><p><b>HTMLが書き換えされました。</b></p></div>`;
+}, 2000);
 
 /**********
 * 155 要素の属性を取得したり、書き換えたりしたい
 **********/
+const item155_link = document.querySelector('.item155_link');
+console.log(item155_link.getAttribute('href')); // 結果: example.com
+console.log(item155_link.hasAttribute('href')); // 結果: true
 
-/**********
-* 156 ページ内のaタグで_blankになってるものに「rel = "noopener"」を付与したい
-**********/
+const item155_image = document.querySelector('.item155_image');
+// img要素のsrcをbar.pngに書き換える
+item155_image.setAttribute('src', 'bar.png');
 
 /**********
 * 157 要素のクラス属性の追加や削除をしたい
 **********/
+const item157_item = document.querySelector('#chapter08_item03');
+item157_item.classList.add('chapter08_item--extend'); // chapter08_item--extend クラスを追加
+item157_item.classList.remove('chapter08_item'); // chapter08_item クラスを削除
+
+item157_item.classList.add('hoge', 'fuga', 'piyo');
+item157_item.classList.remove('fuga', 'piyo');
+
+// 特定のクラスが追加されているかを調べる
+console.log(item157_item.classList.contains('hoge')); // 結果: true
+console.log(item157_item.classList.contains('fuga')); // 結果: false
 
 /**********
 * 158 要素のクラスの有無を切り替えたい
 **********/
+const item158_item = document.querySelector('#chapter08_item03');
+// 1秒ごとにクラスを入れ替える
+setInterval(() => {
+  item158_item.classList.toggle('chapter08_item--toggle');
+}, 2000);
 
 /**********
 * 159 スタイルを変更したい
