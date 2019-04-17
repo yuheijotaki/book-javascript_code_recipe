@@ -92,6 +92,48 @@
         <a class="item155_link" href="example.com">リンク</a>
         <img class="item155_image" src="foo.png">
       </section>
+      <h2>Chapter 9 フォーム要素の操作方法</h2>
+      <section>
+        <p><input id="chapter09_text" type="text" value="こんにちは、世界"></p>
+        <p><textarea id="chapter09_textarea"></textarea></p>
+        <p>
+          <label>
+            <input type="checkbox" id="chapter09_cbA" value="A">
+            チェックボックスA
+          </label>
+          <label>
+            <input type="checkbox" id="chapter09_cbB" value="B" checked>
+            チェックボックスB
+          </label>
+          <label>
+            <input type="checkbox" id="chapter09_cbC" value="C">
+            チェックボックスC
+          </label>
+        </p>
+        <div>
+          <form id="chapter09_radioGroup">
+            <p>
+              <!-- 1つ目のラジオボタン群 -->
+              <label><input type="radio" name="fruit" value="apple" checked>apple</label>
+              <label><input type="radio" name="fruit" value="orange">orange</label>
+              <label><input type="radio" name="fruit" value="grape">grape</label>
+            </p>
+            <p>
+              <!-- 2つ目のラジオボタン群 -->
+              <label><input type="radio" name="drink" value="coke" checked>coke</label>
+              <label><input type="radio" name="drink" value="wine">wine</label>
+              <label><input type="radio" name="drink" value="tea">tea</label>
+            </p>
+          </form>
+        </div>
+        <div>
+          <select id="chapter09_select">
+            <option value="apple">apple</option>
+            <option value="orange">orange</option>
+            <option value="grape" selected>grape</option>
+          </select>
+        </div>
+      </section>
     </main>
   </div>
   <script src="./assets/js/chapter09.js" defer></script>
