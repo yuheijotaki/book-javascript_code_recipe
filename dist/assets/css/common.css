@@ -119,3 +119,48 @@ h3 {
   border: #000 1px solid;
   padding: 20px;
 }
+
+/* 181 CSS Transitionsの終了時に処理を行いたい */
+.item181_rect {
+  width: 100px;
+  height: 40px;
+  background: #999;
+  transition: all 2s;
+}
+
+.item181_rect.state-show {
+  width: 400px;
+}
+
+/* 182 CSS Animationsの終了時に処理を行いたい */
+.item182_rect {
+  width: 40px;
+  height: 40px;
+  background: #999;
+  animation: infinite 1s item182_rotate linear;
+}
+
+@keyframes item182_rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 183 アニメーションのための「Web Animations API」を使いたい */
+.item183_rect {
+  width: 40px;
+  height: 40px;
+  background: #999;
+}
+
+/* 190 `requestAnimationFrame()` でHTML要素を動かしたい */
+.item190_stoker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  will-change: transform;
+  font-size: 5rem;
+}
