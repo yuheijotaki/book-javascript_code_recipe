@@ -1,3 +1,3 @@
-## Chapter12 SVGやcanvas要素を取り扱う
+## Chapter13 処理の実行タイミングを制御する
 
 ### 204 SVGを使いたい
