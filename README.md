@@ -172,3 +172,124 @@ fetch('./new02', item237_data02)
 echo $_POST["hello"];
 ```
 
+### 238 XMLHttpRequestでテキストを読み込みたい
+
+### 239 XMLHttpRequestでデータの読み込み状況を取得したい
+
+> `fetch()` メソッドよりも昔から存在する機能で `XMLHttpRequest` というJavaScriptの機能があります。`XMLHttpRequest` は `fetch()` メソッドよりも冗長な制御をしなければなりませんんが、低レベルの制御ができたり、古いブラウザーでも利用できたりするといった利点があります。
+
+```javascript
+// XHR を作成
+const item238_req = new XMLHttpRequest();
+// 読み込み完了時のイベント
+item238_req.addEventListener('load', (event) => {
+  // レスポンスを受け取る
+  const item238_text = event.target.responseText;
+
+  // テキストを出力
+  console.log(item238_text);
+});
+
+// ファイルを指定
+item238_req.open('GET', './assets/js/sample.txt');
+// 読み込み開始
+item238_req.send();
+```
+
+`progress` イベントのイベントハンドラーで`total` プロパティー（総容量）、`loaded` プロパティー（現在の読み込み量）を取得すると何％のデータが読み込まれたかを取得できる。
+
+```javascript
+item238_req.addEventListener('progress', (event) => {
+  // 読み込みの割合を算出
+  const item238_rate = event.loaded / event.total;
+  console.log(`${item238_rate * 100}%`);
+});
+```
+
+### 241 バックグランドでスクリプトを実行させたい
+
+> JavaScript はメインスレッドで動作しますが、負荷の高い処理を実行すると、その最中は操作不可能となります。JavaScript の処理がUIを担当するメインスレッドを止めてしまうためです。解決する手段のひとつに Web Worker という仕様があります。Web Worker はメインスレッドの JavaScript と分離して処理が実行されます。
+
+注意点として、Web Worker はDOM操作ができない。
+
+```html
+<div class="item241_wrap">
+  <input type="number" value="1" id="item241_numA"> +
+  <input type="number" value="2" id="item241_numB"> =
+  <span class="item241_result"></span>
+</div>
+<button class="item241_btn">計算する</button>
+```
+
+メインスレッドのJS
+
+```javascript
+// 参照を取得
+const item241_numA = document.querySelector('#item241_numA');
+const item241_numB = document.querySelector('#item241_numB');
+const item241_result = document.querySelector('.item241_result');
+const item241_btn = document.querySelector('.item241_btn');
+
+// ワーカーを作成
+const worker = new Worker('./assets/js/worker.js');
+
+// ボタンをクリックしたとき
+item241_btn.addEventListener('click', () => {
+  worker.postMessage([Number(item241_numA.value), Number(item241_numB.value)]);
+  console.log('[メインスクリプト] ワーカーへメッセージを送信');
+});
+
+// ワーカーから受信したとき
+worker.onmessage = function (e) {
+  // 結果を画面に反映
+  item241_result.textContent = e.data;
+  console.log('[メインスクリプト] ワーカーからメッセージを受信');
+};
+```
+
+worker.js
+
+```javascript
+onmessage = (e) => {
+  console.log('[ワーカー] メインスクリプトからメッセージを受信');
+
+  // 足し算を実行
+  const item241_result = e.data[0] + e.data[1];
+
+  console.log('[ワーカー] メインスクリプトにメッセージを送信');
+  postMessage(item241_result);
+}
+```
+
+### 242 バックグランドでサービスワーカーを実行させたい
+
+> サービスワーカーは開いているWeb Pageの裏側で常に起動するスクリプトです。Web Worker はページが開いているときのみ実行されるのに対して、サービスワーカーはブラウザーを閉じていても実行できるという利点があります。
+
+※ Safari12 はブラウザ終了には Service Worker は動作しない。
+
+```javascript
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .register('./assets/js/sw.js')
+    .then((registration) => {
+      // 登録成功
+      console.log('ServiceWorkerの登録に成功', registration.scope);
+    })
+    .catch((error) => {
+      // 登録失敗
+      console.log('ServiceWorkerの登録に失敗', error);
+    });
+}
+```
+
+sw.js
+
+```javascript
+self.addEventListener('fetch', (event) => {
+  console.log('通信が発生', event.request);
+});
+```
+
+> キャッシュ機能を利用するには Google が提供するライブラリ Workbox を利用するのがいいでしょう。
+
+[Workbox  |  Google Developers](https://developers.google.com/web/tools/workbox/)
